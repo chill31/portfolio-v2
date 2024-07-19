@@ -29,14 +29,35 @@
     <a class="nav-logo" href="/">SK</a>
 
     <button class="menu-button">
-      <i class="bi bi-list"></i>
+      <i class="bi bi-list menu-button-icon open"></i>
+      <i class="bi bi-x menu-button-icon close"></i>
     </button>
   </nav>
+
+  <div class="menu">
+
+    <div class="menu-link-wrapper">
+
+      <a href="#showcase" tabindex="-1" class="menu-link">Projects</a>
+      <a href="#about" tabindex="-1" class="menu-link">About Me</a>
+      <a href="#credits" tabindex="-1" class="menu-link">Credits</a>
+
+    </div>
+    <div class="menu-footer">
+      <i class="bi bi-github github-icon"></i>
+      <span class="accent-switch switch-green"></span>
+      <span class="accent-switch switch-blue"></span>
+      <span class="accent-switch switch-red"></span>
+      <span class="accent-switch switch-gray"></span>
+    </div>
+
+  </div>
 
   <section class="hero">
 
     <header>
       <div class="designation">
+        <!-- CHECK JAVASCRIPT IF YOU'RE CONFUSED WHY THESE ARE HERE -->
         <span class="letter"></span>
         <span class="letter"></span>
         <span class="letter"></span>
@@ -61,13 +82,14 @@
 
   </section>
 
-  <section class="showcase">
+  <section class="showcase" id="showcase">
 
     <div class="project">
       <div class="project-info">
         <h2 class="project-title">Discussions</h2>
-        <p class="project-description">A simple web app to encourage conversations on popular or random topics between people worldwide.</p>
-          <button class="project-link-button">View Project</button>
+        <p class="project-description">A simple web app to encourage conversations on popular or random topics between
+          people worldwide.</p>
+        <button class="project-link-button" data-link="chill31-discussions">View Project</button>
       </div>
       <img src="/project-images/discussions-app.png" alt="Discussions Project image" class="project-image">
     </div>
@@ -75,11 +97,32 @@
     <div class="project">
       <div class="project-info">
         <h2 class="project-title">Quiz</h2>
-        <p class="project-description">An advanced web-app which lets user create and take quizzes. A history is also available to view previously attempted quizzes.</p>
-          <button class="project-link-button">View Project</button>
+        <p class="project-description">An advanced web-app which lets user create and take quizzes. A history is also
+          available to view previously attempted quizzes.</p>
+        <button class="project-link-button" data-link="chill31-quiz">View Project</button>
       </div>
       <img src="/project-images/quiz-app.png" alt="Quiz Project image" class="project-image">
     </div>
+
+    <div class="project">
+      <div class="project-info">
+        <h2 class="project-title">Timeline</h2>
+        <p class="project-description">A fully responsive timeline template to use in any website, for free. It comes with two view modes, and with customisable colors and sizes through CSS variables</p>
+        <button class="project-link-button" data-link="chill31-timeline">View Project</button>
+      </div>
+      <img src="/project-images/timeline-app.png" alt="Timeline Template image" class="project-image">
+    </div>
+
+    <div class="project">
+      <div class="project-info">
+        <h2 class="project-title">Contraster</h2>
+        <p class="project-description">A simple webpage which shows the contrast between background and foreground colors, with an accessibility report at the end so a user can judge which colors are best to use together</p>
+        <button class="project-link-button" data-link="contraster">View Project</button>
+      </div>
+      <img src="/project-images/contraster-app.png" alt="Contraster image" class="project-image">
+    </div>
+
+    <button class="github">View All</button>
 
   </section>
 

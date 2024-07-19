@@ -8,10 +8,18 @@
 
 :root {
   --dark: hsl(0, 0%, 7%);
-  --accent: hsl(138, 95%, 71%);
   --gray: hsl(232, 18%, 74%);
 
   --padding: 4rem;
+
+  /** MAIN ACCENT */
+  --accent: var(--accent-green);
+
+  /** FOR CHANGING ACCENT COLORS */
+  --accent-green: hsl(138, 95%, 71%);
+  --accent-red: hsl(0, 95%, 71%);
+  --accent-blue: hsl(183, 95%, 71%);
+  --accent-gray: hsl(0, 0%, 67%);
 }
 
 @media (max-width: 640px) {
@@ -25,11 +33,19 @@
   color: var(--dark);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--dark);
   color: white;
   font-family: 'Figtree', sans-serif;
   font-size: 20px;
+}
+
+body.menu-open {
+  overflow-y: hidden;
 }
 
 button,
@@ -48,6 +64,7 @@ nav {
   top: 2rem;
   left: 50%;
   transform: translate(-50%);
+  z-index: 3;
 }
 
 .nav-logo {
@@ -59,6 +76,12 @@ nav {
   color: var(--accent);
   user-select: none;
   padding: 0.5rem;
+  border: solid 3px transparent;
+  outline: none;
+}
+
+.nav-logo:focus-visible {
+  border: solid 3px white;
 }
 
 .menu-button {
@@ -68,12 +91,10 @@ nav {
   color: white;
   height: 4rem;
   aspect-ratio: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
   cursor: pointer;
   transition: background-color 300ms ease;
-  clip-path: polygon(50% 0%, 100% 0, 100% 75%, 75% 100%, 0 100%, 0 23%, 23% 0);
+  clip-path: polygon(50% 0%, 100% 0, 100% 75%, 75% 100%, 0 100%, 0 25%, 25% 0);
 }
 
 @media (max-width: 640px) {
@@ -82,17 +103,45 @@ nav {
   }
 }
 
-.menu-button i {
-  font-size: clamp(1.8rem, 5vw, 3rem);
-}
-
-.menu-button:where(:hover, :focus) {
+.menu-button:hover {
   background-color: color-mix(in hsl, var(--gray) 15%, #ffffff00);
 }
 
-.menu-button:focus {
+.menu-button:focus-visible {
   clip-path: unset;
   border-color: white;
+}
+
+.menu-button-icon {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.open {
+  transition: 300ms ease 300ms;
+  transition-property: transform, opacity;
+}
+
+.close {
+  transform: translate(-100%, -50%);
+  opacity: 0;
+  transition: 300ms ease;
+  transition-property: transform, opacity;
+}
+
+body.menu-open .close {
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  transition-delay: 300ms;
+}
+
+body.menu-open .open {
+  transform: translate(0, -50%);
+  opacity: 0;
+  transition-delay: 0ms;
 }
 
 section {
@@ -264,7 +313,7 @@ section.showcase {
   flex-direction: row-reverse;
 }
 
-.project > * {
+.project>* {
   flex: 1;
 }
 
@@ -308,6 +357,7 @@ section.showcase {
   width: fit-content;
   min-width: max-content;
   background-color: var(--accent);
+  color: black;
   font-size: 1.2rem;
   padding: 1rem 2rem;
   border: solid 3px transparent;
@@ -317,12 +367,12 @@ section.showcase {
   transition-property: transform, clip-path;
 }
 
-.project-link-button:where(:hover, :focus) {
+.project-link-button:where(:hover, :focus-visible) {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 0 100%, 0 0);
   transform: scale(1.1);
 }
 
-.project-link-button:focus {
+.project-link-button:focus-visible {
   border-color: white;
 }
 
@@ -366,4 +416,154 @@ section.showcase {
     max-width: 30rem;
   }
 
+}
+
+.showcase button.github {
+  width: fit-content;
+  min-width: max-content;
+  background-color: var(--accent);
+  color: black;
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+  border: solid 3px var(--accent);
+  cursor: pointer;
+  border-radius: .25rem;
+  transition: 300ms ease;
+  transition-property: background-color, color;
+  outline: none;
+}
+
+.showcase button.github:where(:hover, :focus-visible) {
+  background-color: transparent;
+  color: white;
+}
+
+/** MENU DESIGN */
+
+.menu {
+  position: fixed;
+  z-index: 2;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-color: color-mix(in hsl, var(--gray) 15%, #ffffff00);
+  border-bottom-left-radius: 150%;
+  border-bottom-right-radius: 150%;
+  backdrop-filter: blur(20px);
+  transition: 500ms ease;
+  transition-property: height, top, border-bottom-left-radius, border-bottom-right-radius, background-color;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body.menu-open .menu {
+  top: 0;
+  height: 100%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: color-mix(in hsl, var(--dark) 50%, #00000000);
+}
+
+.menu-link-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.menu-link {
+  font-size: 1.5rem;
+  color: var(--accent);
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  outline: none;
+  position: relative;
+  transform: translateY(-2rem);
+  opacity: 0;
+  transition: 200ms ease;
+  transition-property: transform, opacity;
+}
+
+.menu-link.visible-animate {
+  opacity: 1;
+  transform: unset;
+}
+
+.menu-link::before {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: right;
+  transition: transform 300ms ease;
+}
+
+.menu-link:where(:hover, :focus-visible)::before {
+  transform: translateX(-50%) scaleX(1);
+  transform-origin: left;
+}
+
+.menu-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding-inline: 1rem;
+  padding-block: 2rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.menu-footer .github-icon {
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.github-icon:hover {
+  color: var(--accent);
+}
+
+.accent-switch {
+  height: 1.5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  border: solid .25rem transparent;
+}
+
+.active {
+  border-color: color-mix(in srgb, var(--accent) 20%, white)
+}
+
+.switch-green {
+  background-color: var(--accent-green);
+}
+
+.switch-blue {
+  background-color: var(--accent-blue);
+}
+
+.switch-red {
+  background-color: var(--accent-red);
+}
+
+.switch-gray {
+  background-color: var(--accent-gray);
 }
