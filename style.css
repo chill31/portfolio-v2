@@ -14,6 +14,12 @@
   --padding: 4rem;
 }
 
+@media (max-width: 640px) {
+  :root {
+    --padding: 1rem;
+  }
+}
+
 ::selection {
   background-color: var(--accent);
   color: var(--dark);
@@ -24,6 +30,11 @@ body {
   color: white;
   font-family: 'Figtree', sans-serif;
   font-size: 20px;
+}
+
+button,
+a {
+  font-family: 'Figtree', sans-serif;
 }
 
 nav {
@@ -41,18 +52,20 @@ nav {
 
 .nav-logo {
   cursor: pointer;
-}
-
-.nav-logo img {
-  height: 4rem;
-  aspect-ratio: 1;
-}
-
-.nav-logo:hover img {
-  filter: hue-rotate(305deg) brightness(1.3);
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 5px;
+  color: var(--accent);
+  user-select: none;
+  padding: 0.5rem;
 }
 
 .menu-button {
+  background-color: transparent;
+  border: solid 3px transparent;
+  outline: none;
+  color: white;
   height: 4rem;
   aspect-ratio: 1;
   display: flex;
@@ -60,26 +73,36 @@ nav {
   align-items: center;
   cursor: pointer;
   transition: background-color 300ms ease;
+  clip-path: polygon(50% 0%, 100% 0, 100% 75%, 75% 100%, 0 100%, 0 23%, 23% 0);
+}
+
+@media (max-width: 640px) {
+  .menu-button {
+    height: 3rem;
+  }
 }
 
 .menu-button i {
-  font-size: 3rem;
+  font-size: clamp(1.8rem, 5vw, 3rem);
 }
 
-.menu-button:hover {
-  background-color: color-mix(in hsl, var(--gray) 10%, #ffffff00);
+.menu-button:where(:hover, :focus) {
+  background-color: color-mix(in hsl, var(--gray) 15%, #ffffff00);
+}
+
+.menu-button:focus {
+  clip-path: unset;
+  border-color: white;
 }
 
 section {
   display: flex;
-  justify-content: center;
-  align-items: start;
   flex-direction: column;
   min-height: 100vh;
-  padding-inline: var(--padding);
 }
 
 section.hero {
+  justify-content: center;
   align-items: center;
 }
 
@@ -108,7 +131,7 @@ header {
 }
 
 .name {
-  font-size: calc(2vw + 3rem);
+  font-size: clamp(2.5rem, 5vw, 15rem);
   position: relative;
   display: flex;
   justify-content: start;
@@ -130,7 +153,8 @@ header {
   color: white;
 }
 
-.name-break::before, .name-break::after {
+.name-break::before,
+.name-break::after {
   content: '';
   position: absolute;
   top: 0;
@@ -181,4 +205,165 @@ header {
   100% {
     transform: scaleX(0);
   }
+}
+
+.scroll-indicator {
+  cursor: pointer;
+  position: absolute;
+  bottom: 3rem;
+  font-size: clamp(1.2rem, 3vw, 3rem);
+  opacity: 0;
+  transition: opacity 300ms ease 2000ms;
+  animation: up-and-down 5000ms ease 4000ms infinite forwards;
+}
+
+header:has(.name.visible-animate)~.scroll-indicator {
+  opacity: 1;
+}
+
+@keyframes up-and-down {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  20% {
+    transform: translateY(1.5rem);
+  }
+
+  40% {
+    transform: translateY(1rem);
+  }
+
+  70% {
+    transform: translateY(1.5rem);
+  }
+
+}
+
+section.showcase {
+  gap: var(--padding);
+  padding: 0;
+  justify-content: start;
+  align-items: center;
+}
+
+.project {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 2rem);
+  padding-inline: 1rem;
+  gap: 2rem;
+  min-height: 30rem;
+  counter-increment: project-counter;
+}
+
+.project:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.project > * {
+  flex: 1;
+}
+
+.project-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 50%;
+}
+
+.project-title {
+  font-size: clamp(1.4rem, 3vw, 10rem);
+  position: relative;
+}
+
+.project-title::before {
+  content: '';
+  width: 5rem;
+  height: 2px;
+  background-color: var(--accent);
+  position: absolute;
+  top: -2rem;
+  left: 0;
+}
+
+.project-title::after {
+  content: counter(project-counter);
+  position: absolute;
+  top: -2.65rem;
+  left: 6rem;
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+.project-description {
+  line-height: 1.5;
+  max-width: 50ch;
+}
+
+.project-link-button {
+  width: fit-content;
+  min-width: max-content;
+  background-color: var(--accent);
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+  border: solid 3px transparent;
+  cursor: pointer;
+  clip-path: polygon(10% 0, 100% 0, 100% 60%, 90% 100%, 0 100%, 0 40%);
+  transition: 300ms ease;
+  transition-property: transform, clip-path;
+}
+
+.project-link-button:where(:hover, :focus) {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 0 100%, 0 0);
+  transform: scale(1.1);
+}
+
+.project-link-button:focus {
+  border-color: white;
+}
+
+.project-image {
+  aspect-ratio: 16/9;
+  width: 50%;
+  border: solid 1px var(--gray);
+}
+
+@media (max-width: 840px) {
+
+  section.showcase {
+    gap: 8rem;
+    padding-block: 4rem;
+  }
+
+  .project {
+    flex-direction: column-reverse;
+    gap: 4rem;
+    min-height: unset;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .project:nth-of-type(even) {
+    flex-direction: column-reverse;
+  }
+
+  .project-info {
+    width: 100%;
+    max-width: 30rem;
+  }
+
+  .project-link-button {
+    padding: .5rem 1rem;
+    font-size: 1rem;
+  }
+
+  .project-image {
+    width: 100%;
+    max-width: 30rem;
+  }
+
 }

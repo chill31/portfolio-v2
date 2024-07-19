@@ -1,24 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The newest version (V2) of the portfolio for Chill31">
+  <meta name="keywords" content="Portfolio, Animations, Chill31">
+  <meta name="author" content="Chill31">
+
+  <meta property="og:title" content="Shaurya Kumar | Web Developer" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://chill31-portfolio-v2.vercel.app/seo-logo.png" />
+  <meta property="og:url" content="https://chill31-portfolio-v2.vercel.app" />
+  <meta property="og:description" content="A modern design portfolio by Chill31" />
+  <meta property="og:site_name" content="Portfolio | Shaurya Kumar" />
+  <meta property="og:locale" content="en_US" />
+
   <title>Chill31 Portfolio Redesign</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <nav>
-    <a class="nav-logo" href="/">
-      <img src="logo.png" alt="Logo">
-    </a>
+    <a class="nav-logo" href="/">SK</a>
 
-    <span class="menu-button">
+    <button class="menu-button">
       <i class="bi bi-list"></i>
-    </span>
+    </button>
   </nav>
 
   <section class="hero">
@@ -45,10 +57,33 @@
       </h1>
     </header>
 
-    <div class="image-container"></div>
+    <i class="bi bi-chevron-down scroll-indicator"></i>
+
+  </section>
+
+  <section class="showcase">
+
+    <div class="project">
+      <div class="project-info">
+        <h2 class="project-title">Discussions</h2>
+        <p class="project-description">A simple web app to encourage conversations on popular or random topics between people worldwide.</p>
+          <button class="project-link-button">View Project</button>
+      </div>
+      <img src="/project-images/discussions-app.png" alt="Discussions Project image" class="project-image">
+    </div>
+
+    <div class="project">
+      <div class="project-info">
+        <h2 class="project-title">Quiz</h2>
+        <p class="project-description">An advanced web-app which lets user create and take quizzes. A history is also available to view previously attempted quizzes.</p>
+          <button class="project-link-button">View Project</button>
+      </div>
+      <img src="/project-images/quiz-app.png" alt="Quiz Project image" class="project-image">
+    </div>
 
   </section>
 
   <script src="script.js"></script>
 </body>
+
 </html>
