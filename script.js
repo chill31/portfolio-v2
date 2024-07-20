@@ -98,6 +98,21 @@ projectLinkButtons.forEach((button) => {
   });
 });
 
+/** PROJECT CARDS OBSERVER */
+
+const projectCards = document.querySelectorAll('.project > *');
+const projectCardsObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible-animate');
+    }
+  });
+}, {
+  threshold: window.innerWidth <= 840 ? 0.25 : 0.5
+});
+
+projectCards.forEach((card) => projectCardsObserver.observe(card));
+
 const viewAllButton = document.querySelector('section.showcase button.github');
 viewAllButton.addEventListener('click', () => {
   window.location.href = 'https://github.com/chill31?tab=repositories'
