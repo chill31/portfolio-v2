@@ -10,6 +10,7 @@
 :root {
   --dark: hsl(0, 0%, 7%);
   --gray: hsl(232, 18%, 74%);
+  --text-gray: hsl(0, 0%, 86%);
 
   --padding: 4rem;
 
@@ -377,6 +378,7 @@ section.showcase {
   line-height: 1.5;
   max-width: 50ch;
   transform: translateY(3rem);
+  color: var(--text-gray);
   opacity: 0;
   transition: 500ms ease 300ms;
   transition-property: opacity, transform;
@@ -497,6 +499,40 @@ section.showcase {
 .showcase button.github:where(:hover, :focus-visible) {
   background-color: transparent;
   color: white;
+}
+
+/** ABOUT ME SECTION DESIGN */
+
+section.about-me {
+  display: flex;
+  gap: 4rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+  position: relative;
+  overflow-x: hidden;
+  padding-bottom: 4rem;
+}
+
+.about-me-title {
+  font-size: clamp(2rem, 4vw, 12rem);
+}
+
+.about-me p {
+  width: 50ch;
+  max-width: calc(100% - calc(4 * var(--padding)));
+  line-height: 1.5;
+  color: var(--text-gray);
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+}
+
+code {
+  color: var(--accent);
+}
+
+.real-name {
+  color: var(--accent);
 }
 
 /** MENU DESIGN */
