@@ -335,7 +335,8 @@ section.showcase {
   transition-property: opacity, transform;
 }
 
-.project-title::before, .project-title::after {
+.project-title::before,
+.project-title::after {
   position: absolute;
   transform: translateX(-5rem);
   opacity: 0;
@@ -366,7 +367,8 @@ section.showcase {
   opacity: 1;
 }
 
-.project-info.visible-animate .project-title::before, .project-info.visible-animate .project-title::after {
+.project-info.visible-animate .project-title::before,
+.project-info.visible-animate .project-title::after {
   transform: unset;
   opacity: 1;
 }
@@ -397,7 +399,7 @@ section.showcase {
   transform: translateY(3rem);
   opacity: 0;
   clip-path: polygon(10% 0, 100% 0, 100% 60%, 90% 100%, 0 100%, 0 40%);
-  transition: 
+  transition:
     clip-path 300ms ease,
     transform 500ms ease 500ms,
     opacity 500ms ease 500ms;
@@ -430,7 +432,8 @@ section.showcase {
   transform: translate(-10rem);
 }
 
-.project-image.visible-animate, .project:nth-of-type(even) .project-image.visible-animate {
+.project-image.visible-animate,
+.project:nth-of-type(even) .project-image.visible-animate {
   transform: unset;
   opacity: 1;
 }
@@ -467,6 +470,11 @@ section.showcase {
   .project-image {
     width: 100%;
     max-width: 30rem;
+    transform: unset;
+  }
+
+  .project:nth-of-type(even) .project-image {
+    transform: unset;
   }
 
 }
