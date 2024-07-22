@@ -535,6 +535,37 @@ code {
   color: var(--accent);
 }
 
+/** FOOTER DESIGN */
+
+footer {
+  padding-block: 2rem;
+  width: 100%;
+  background-color: color-mix(in srgb, var(--gray) 20%, black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-text {
+  text-align: center;
+  width: 40ch;
+  max-width: 80%;
+}
+
+.footer-link {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.footer-link:focus-visible {
+  outline: 2px solid var(--accent)
+}
+
+.footer-text-logo {
+  font-weight: bold;
+  color: var(--accent);
+}
+
 /** MENU DESIGN */
 
 .menu {
