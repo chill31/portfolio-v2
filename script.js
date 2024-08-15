@@ -7,15 +7,16 @@ document.querySelector(`.switch-${theme}`).classList.add('active');
 
 const mainTitle = document.querySelector('h1.name');
 const designation = document.querySelector('.designation');
-const designationSpans = document.querySelectorAll('.designation .letter');
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible-animate');
       if (entry.target.classList.contains('designation') && !entry.target.classList.contains('animated')) {
-        animateDesignation();
         entry.target.classList.add('animated');
+        setTimeout(() => {
+          animateDesignation();
+        }, 300);
       }
     }
   });
@@ -24,22 +25,32 @@ const observer = new IntersectionObserver((entries) => {
 observer.observe(designation);
 observer.observe(mainTitle);
 
+const designationSpansContainer = document.querySelector('.designation');
+
 const randomChars = ["#", "$", "%", "&", "*", "+", "-", "!", "@", "?"];
-const actualDesignationContent = 'web developer'.toUpperCase().split('');
+let actualDesignationContent = 'web developer'.toUpperCase().split('');
+
+actualDesignationContent.forEach((char) => {
+  const span = document.createElement('span');
+  span.classList.add('letter');
+  if (char === ' ') {
+    span.classList.add('whitespace');
+  }
+  span.textContent = char;
+  designationSpansContainer.appendChild(span);
+});
+
+let randomInterval = setInterval(() => {
+  designationSpans.forEach((span) => {
+    if (!span.classList.contains('actual-content')) {
+      span.textContent = randomChars[Math.floor(Math.random() * randomChars.length)];
+    }
+  });
+}, 30);
+
+const designationSpans = document.querySelectorAll('.designation .letter');
 
 function animateDesignation() {
-  designationSpans.forEach((span) => {
-    span.textContent = randomChars[Math.floor(Math.random() * randomChars.length)];
-  });
-
-  let randomInterval = setInterval(() => {
-    designationSpans.forEach((span) => {
-      if (!span.classList.contains('actual-content')) {
-        span.textContent = randomChars[Math.floor(Math.random() * randomChars.length)];
-      }
-    });
-  }, 45);
-
   actualDesignationContent.forEach((char, index) => {
     setTimeout(() => {
       designationSpans[index].textContent = char;
